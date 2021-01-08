@@ -79,7 +79,14 @@ class Pdf {
 		// Merge default with custom configuration
 		$mpdf_config['fontDir'] = array_merge($fontDirs, [Config::get('pdf.font_path')]);
 		$mpdf_config['fontdata'] = array_merge($fontData, Config::get('pdf.font_data'));
-
+		
+		//** 08-02-2021 added this
+		$configfontdata = $this->getConfig('fontdata');
+		if($configfontdata) {
+			$mpdf_config['fontdata'] = array_merge($mpdf_config['fontdata'], $configfontdata);
+		}
+		//** 08-02-2021 added this
+		
 		return $mpdf_config;
 	}
 
